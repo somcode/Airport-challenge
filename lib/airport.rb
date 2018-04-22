@@ -4,15 +4,18 @@ require_relative 'weather'
 class Airport
 
   attr_reader :weather
-  attr_accessor :hangar
+  attr_accessor :hangar, :capacity
+  DEFAULT_CAPACITY = 10
 
-  def initialize
+  def initialize(capacity = DEFAULT_CAPACITY)
     @hangar = []
+    @capacity = DEFAULT_CAPACITY
     @weather = Weather.new
   end
 
   def land(plane)
     raise ("You can't land in stormy weather") if @weather.stormy?
+    raise ("Airport is full") if @hangar.length == capacity
     @hangar.push(plane)
   end
 
