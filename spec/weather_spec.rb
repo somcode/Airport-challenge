@@ -4,15 +4,11 @@ describe Weather do
 
   subject(:weather) { described_class.new }
 
-  describe "#stormy" do
-    it "check the weather if is stormy" do
-      allow(weather).to receive(:weather_generator) { :stormy }
-      expect(weather.stormy?).to eq (true)
-    end
-
-    it "check the weather if it is not stormy" do
-      allow(weather).to receive(:weather_generator) { :sunny }
-      expect(weather.stormy?).to eq (false)
+  describe "#weather_generator" do
+    it "check the weather" do
+      srand(0)
+      expect(subject.weather_generator).to eq :stormy
     end
   end
+
 end

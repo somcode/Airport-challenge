@@ -13,15 +13,15 @@ class Airport
     @weather = Weather.new
   end
 
-  def land(plane)
-    raise "You can't land in stormy weather" if @weather.stormy?
+  def land(plane, weather)
+    raise "You can't land in stormy weather" if weather == :stormy
     raise "Airport is full" if @hangar.length == capacity
     raise "Plane is already landed" unless flying?(plane)
     @hangar.push(plane)
   end
 
-  def take_off(plane)
-    raise "You can't take off in stormy weather" if @weather.stormy?
+  def take_off(plane, weather)
+    raise "You can't take off in stormy weather" if weather == :stormy
     raise "Plane is already taken off" if flying?(plane)
     @hangar.delete(plane)
     @hangar
