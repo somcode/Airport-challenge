@@ -21,6 +21,14 @@ describe Airport do
         expect{ airport.land(plane1) }.to raise_error "You can't land in stormy weather"
       end
     end
+
+    context "when the plane is already landed" do
+      it "can't land again" do
+        allow(airport.weather).to receive(:stormy?) { false }
+        airport.land(plane1)
+        expect{ airport.land(plane1) }.to raise_error "Plane is already landed"
+      end
+    end
   end
 
   context "when airport is full" do
@@ -57,7 +65,7 @@ describe Airport do
       end
     end
 
-    context "if the plane is already taken off" do
+    context "when the plane is already taken off" do
       it "can't take off anymore" do
         airport.hangar = [plane1]
         allow(airport.weather).to receive(:stormy?) { false }
