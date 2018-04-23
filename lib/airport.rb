@@ -21,8 +21,15 @@ class Airport
 
   def take_off(plane)
     raise ("You can't take off in stormy weather") if @weather.stormy?
+    raise ("Plane is already taken off") if flying?(plane)
     @hangar.delete(plane)
     @hangar
+  end
+
+  private
+
+  def flying?(plane)
+    !@hangar.include?(plane)
   end
 
 end

@@ -57,6 +57,15 @@ describe Airport do
       end
     end
 
+    context "if the plane is already taken off" do
+      it "can't take off anymore" do
+        airport.hangar = [plane1]
+        allow(airport.weather).to receive(:stormy?) { false }
+        airport.take_off(plane1)
+        expect{ airport.take_off(plane1) }.to raise_error "Plane is already taken off"
+      end
+    end
+
   end
 
 end
